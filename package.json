@@ -2,8 +2,8 @@
   "name": "mm-qrcode",
   "description": "Webcomponent mm-qrcode following open-wc recommendations",
   "license": "MIT",
-  "author": "mm-qrcode",
-  "version": "0.0.0",
+  "author": "mmatmirrarme",
+  "version": "0.0.1",
   "main": "index.js",
   "module": "index.js",
   "scripts": {

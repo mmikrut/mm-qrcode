@@ -5,7 +5,6 @@ export class MmQrcode extends LitElement {
     return css`
       :host {
         display: block;
-        padding: 25px;
         color: var(--mm-qrcode-text-color, #000);
       }
     `;
@@ -13,25 +12,32 @@ export class MmQrcode extends LitElement {
 
   static get properties() {
     return {
-      title: { type: String },
-      counter: { type: Number },
+      qrText: { type: String, },
+      dataUrl: { type: String, },
     };
   }
 
   constructor() {
     super();
-    this.title = 'Hey there';
-    this.counter = 5;
+    this.qrText = '';
+    this.dataUrl = '';
   }
 
-  __increment() {
-    this.counter += 1;
-  }
-
+  requestUpdate(propName,oldVal) {
+      const newVal = this[propName];  
+      //console.debug('requestUpdate - propName,oldVal,newVal:', propName,oldVal,newVal ); 
+      if ( propName === 'qrText' && oldVal !== newVal && !!newVal && typeof QRCode !== "undefined" && QRCode?.toDataURL ) {
+        QRCode.toDataURL( newVal).then( (ret) => { /* console.debug('ret:',ret); */ this.dataUrl = ret; });   
+      }
+      return super.requestUpdate(propName, oldVal);
+    }
+  
   render() {
+    //console.debug("MmQrcode:render()" );
     return html`
-      <h2>${this.title} Nr. ${this.counter}!</h2>
-      <button @click=${this.__increment}>increment</button>
+
+    <img src="${this.dataUrl}"/>
+
     `;
   }
 }

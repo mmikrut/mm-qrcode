@@ -8,22 +8,42 @@
     }
   </style>
 </head>
+
 <body>
-  <div id="demo"></div>
+  <script src="https://unpkg.com/qrcode/build/qrcode"></script> 
+  <!--
+  <h3>Hardcoded</h3>
+  <canvas id="dcanvas"></canvas>
+
+  <script>
+    //console.debug("QRCode:",QRCode);
+    QRCode.toCanvas(document.getElementById('dcanvas'), 'https://mirrarme.com',
+     function (error) { if (error) console.error(error); /* else console.log('success!'); */ } );
+  </script>
+
+<hr>
+-->
+
+<div id="demo"></div>
 
   <script type="module">
     import { html, render } from 'lit';
     import '../mm-qrcode.js';
 
-    const title = 'Hello owc World!';
+
+    const uri = 'https://mirrarme.com';
     render(
       html`
-        <mm-qrcode .title=${title}>
-          some light-dom
+
+        <mm-qrcode .qrText=${uri}>
+          mm-qrcode is here !
         </mm-qrcode>
+
       `,
       document.querySelector('#demo')
     );
   </script>
+
+
 </body>
 </html>
